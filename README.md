@@ -1,6 +1,6 @@
 # Toodoo
 
-TODO: Write a gem description
+Silly and probably not so useful gem which adds a toodoo kernel method to remind you you've got stuff to fix by shouting colored warnings in your console as you hit this piece of code in your development.
 
 ## Installation
 
@@ -18,7 +18,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'toodoo'
+
+def my_method
+  toodoo('replace this shitty code') do
+    a = 1
+    b = 2
+    puts 'herp derp'
+    c = a + b
+  end
+end
+
+my_method
+```
 
 ## Contributing
 
