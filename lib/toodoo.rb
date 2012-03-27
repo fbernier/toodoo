@@ -7,22 +7,25 @@ module Toodoo
     attr_accessor :configuration
   end
 
-  def self.configure
-    self.configuration ||= Configuration.new
-    yield(configuration)
+  class Color
+    extend Term::ANSIColor
   end
+
 
   class Configuration
     attr_accessor :priority_color
 
     def initialize
-      @priority_color = { :low => Color.yellow, :medium => Color.orange, :high => Color.red }
+      @priority_color ||= { :low => Color.green, :medium => Color.yellow, :high => Color.red }
     end
   end
-end
 
-class Color
-  extend Term::ANSIColor
+  def self.configure
+    self.configuration ||= Configuration.new
+    yield(configuration) if block_given?
+  end
+
+  self.configure
 end
 
 module Kernel
