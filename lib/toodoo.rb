@@ -34,6 +34,6 @@ module Kernel
       print Toodoo.Configuration.priority_color[:priority], Color.bold, "TODO: " << description, "\n", caller[0], Color.clear, "\n"
     end
 
-    yield unless block_given?
+    yield if block_given?
   end
 end
