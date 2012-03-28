@@ -1,5 +1,5 @@
 require 'toodoo/version'
-require 'term/ansicolor'
+require 'rainbow'
 require 'date'
 
 module Toodoo
@@ -7,16 +7,11 @@ module Toodoo
     attr_accessor :configuration
   end
 
-  class Color
-    extend Term::ANSIColor
-  end
-
-
   class Configuration
     attr_accessor :priority_color
 
     def initialize
-      @priority_color ||= { :low => Color.green, :medium => Color.yellow, :high => Color.red }
+      @priority_color ||= { :low => :green, :medium => :yellow, :high => :red }
     end
   end
 
@@ -31,7 +26,7 @@ end
 module Kernel
   def toodoo(description, priority = :low, due_date = Date.today)
     if due_date >= Date.today
-      print Toodoo.configuration.priority_color[priority], Toodoo::Color.bold, "TODO: " << description, "\n", caller[0], Toodoo::Color.clear, "\n"
+      print "TODO: ".foreground(:blue) + (description  + "\n" + caller[0] + "\n").foreground(Toodoo.configuration.priority_color[priority])
     end
 
     yield if block_given?

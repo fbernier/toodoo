@@ -16,5 +16,10 @@ Gem::Specification.new do |gem|
   gem.version       = Toodoo::VERSION
 
   gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'term-ansicolor'
+  gem.add_development_dependency 'rainbow'
+
+  if gem.platform.to_s == 'x86-mswin32'
+    gem.add_development_dependency 'windows-pr'
+    gem.add_development_dependency 'win32console'
+  end
 end
